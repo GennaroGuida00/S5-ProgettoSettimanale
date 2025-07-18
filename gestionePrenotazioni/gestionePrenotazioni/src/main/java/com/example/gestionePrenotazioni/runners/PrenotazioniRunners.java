@@ -2,6 +2,7 @@ package com.example.gestionePrenotazioni.runners;
 
 import com.example.gestionePrenotazioni.entities.Edificio;
 import com.example.gestionePrenotazioni.entities.Postazione;
+import com.example.gestionePrenotazioni.entities.Utente;
 import com.example.gestionePrenotazioni.enums.Tipo_postazione;
 import com.example.gestionePrenotazioni.services.EdificioService;
 import com.example.gestionePrenotazioni.services.PostazioneService;
@@ -10,6 +11,8 @@ import com.example.gestionePrenotazioni.services.UtenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class PrenotazioniRunners implements CommandLineRunner {
@@ -55,6 +58,36 @@ public class PrenotazioniRunners implements CommandLineRunner {
         postazioneService.addPostazioni(p3);
         postazioneService.addPostazioni(p4);
         postazioneService.addPostazioni(p5);
+
+        Utente u1 = new Utente("marioR", "Mario Rossi", "mario@example.com");
+        Utente u2 = new Utente("annaB", "Anna Bianchi", "anna@example.com");
+        Utente u3 = new Utente("lucaG", "Luca Gialli", "luca@example.com");
+        Utente u4 = new Utente("GennaroG", "gennaroguida", "luca@example.com");
+
+        utenteService.addUtenti(u1);
+        utenteService.addUtenti(u2);
+        utenteService.addUtenti(u3);
+        utenteService.addUtenti(u4);
+
+//        Edificio edificio1 = edificioService.findById(1);
+//        Edificio edificio2 = edificioService.findById(2);
+
+
+//        Utente u1 = utenteService.findById(1);
+//        Utente u2 = utenteService.findById(2);
+//        Utente u3 = utenteService.findById(3);
+//
+//        Postazione p1 = postazioneService.findById(1);
+//        Postazione p2 = postazioneService.findById(2);
+
+        prenotazioneService.effettuaPrenotazione(u1, p1);
+        prenotazioneService.effettuaPrenotazione(u2, p2);
+        prenotazioneService.effettuaPrenotazione(u1, p1);
+        prenotazioneService.effettuaPrenotazione(u3, p2);
+        prenotazioneService.effettuaPrenotazione(u4, p2);
+
+        System.out.println(postazioneService.findByTypeAndCity(Tipo_postazione.OPENSPACE, "Milano"));
+
 
     }
 }
